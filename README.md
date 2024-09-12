@@ -28,12 +28,6 @@ La arquitectura de **Gesliga** sigue el modelo cliente-servidor y está compuest
 - **Servidor (Backend)**: Expone endpoints para realizar operaciones CRUD sobre las entidades del sistema, maneja la lógica de negocios, y gestiona la autenticación y la autorización.
 - **Base de Datos**: El modelo de datos relacional en **PostgreSQL** incluye todas las entidades definidas para la gestión de la liga.
   
-### Diagrama de Arquitectura
-
-Un diagrama de la arquitectura del sistema puede ayudar a visualizar cómo interactúan estos componentes. [Incluir diagrama de arquitectura aquí]
-
----
-
 ## 3. Entidades y Modelo de Datos
 
 ### Entidades Principales
@@ -41,7 +35,7 @@ Un diagrama de la arquitectura del sistema puede ayudar a visualizar cómo inter
 1. **League**: Información detallada de la liga, como nombre, fundación, ubicación, y contacto.
 2. **Club**: Representa a los clubes de la liga, incluyendo nombre, colores, delegado asociado, presidente, y enlaces a redes sociales.
 3. **Player**: Detalles sobre los jugadores, incluyendo nombre, fecha de nacimiento, nacionalidad, posición, número de carnet, etc.
-4. **Pase**: Documenta los movimientos de jugadores entre clubes, con detalles sobre contratos, fechas y comisiones de agentes.
+4. **Pass**: Documenta los movimientos de jugadores entre clubes, con detalles sobre contratos, fechas y comisiones de agentes.
 5. **Request**: Gestiona las solicitudes de transferencias o liberaciones de jugadores que requieren aprobación de la liga.
 6. **Sanction**: Registra las sanciones aplicadas a jugadores o clubes, incluyendo el tipo, motivo, fechas, y estado de la sanción.
 7. **User**: Almacena la información de usuarios que interactúan con la aplicación, como credenciales de inicio de sesión, rol y estado de la cuenta.
@@ -52,7 +46,7 @@ Un diagrama de la arquitectura del sistema puede ayudar a visualizar cómo inter
 ### Relaciones entre Entidades
 
 - Un **Club** puede tener múltiples **Players** asociados.
-- Un **Player** puede tener múltiples **Pases** a lo largo del tiempo.
+- Un **Player** puede tener múltiples **Passes** a lo largo del tiempo.
 - Una **Sanction** puede estar vinculada a un **Player** o un **Club**.
 - Un **User** puede recibir múltiples **Notifications**.
 - Una **League** puede tener múltiples registros en **ChampionHistory**.
@@ -85,27 +79,66 @@ La autorización se gestiona a nivel de backend utilizando middleware para valid
 
 ---
 
-## 5. Flujos de Trabajo
+## Flujo de Trabajo Detallado para 'Gesliga'
 
-### Principales Flujos de Trabajo
+### 1. Gestión de Solicitudes de Transferencia y Liberación
+- **Delegado: Crear Solicitud de Transferencia o Liberación**
+  - El delegado de un club inicia el proceso creando una solicitud para transferir o liberar a un jugador.
+  - Se ingresa la información requerida (detalles del jugador, tipo de solicitud, motivo, etc.).
 
-1. **Gestión de Transferencias**
-   - El delegado del club crea una solicitud de transferencia para un jugador.
-   - La liga revisa la solicitud, pudiendo aprobarla o rechazarla.
-   - Las decisiones se registran y las notificaciones se envían a los usuarios relevantes.
+- **Sistema: Validar Solicitud Inicial**
+  - El sistema realiza una validación inicial de los datos (formato, campos obligatorios completos, etc.).
 
-2. **Gestión de Sanciones**
-   - La liga emite una sanción para un jugador o club.
-   - La sanción es registrada en el sistema, y se envían notificaciones automáticas a los usuarios afectados.
-   - El sistema actualiza el estado de las sanciones y permite el seguimiento.
+- **Liga: Revisar Solicitud**
+  - La liga revisa la solicitud presentada por el delegado.
+  - La revisión puede incluir la verificación de los detalles del jugador, del club involucrado, y de la conformidad con las reglas de la liga.
 
-3. **Notificaciones**
-   - Notificaciones automáticas se generan y envían a los usuarios cuando ocurren eventos importantes (como aprobaciones de transferencias, aplicación de sanciones, cambios de estado).
-   - Los usuarios pueden ver sus notificaciones en su panel de control.
+- **Liga: Aprobar o Rechazar Solicitud**
+  - Si la solicitud cumple con los criterios, la liga puede aprobarla.
+  - Si no cumple, la solicitud es rechazada, indicando las razones.
 
-#### Diagramas de Flujo
+- **Sistema: Actualizar Estado de la Solicitud**
+  - Si la solicitud es aprobada, se actualiza el estado a "Aprobado".
+  - Si es rechazada, se actualiza el estado a "Rechazado".
 
-Se pueden agregar diagramas de flujo detallados para cada uno de estos procesos para ilustrar los pasos clave. [Incluir diagramas de flujo aquí]
+- **Sistema: Generar Notificación**
+  - Se genera una notificación para el delegado y los clubes involucrados sobre la aprobación o el rechazo de la solicitud.
+
+- **Delegado: Revisar Estado de Solicitud**
+  - El delegado puede revisar el estado actualizado de la solicitud y recibir una notificación.
+
+### 2. Gestión de Transferencias Aprobadas
+- **Sistema: Registrar Transacción de Transferencia**
+  - Si la solicitud es aprobada, el sistema registra la transferencia del jugador.
+  - Se actualizan los registros del club y del jugador para reflejar la transferencia.
+
+### 3. Monitoreo y Emisión de Sanciones
+- **Liga: Monitorear Actividades de Clubes y Jugadores**
+  - La liga monitorea las actividades de los clubes y jugadores para asegurar el cumplimiento de las reglas.
+
+- **Liga: Emitir Sanciones**
+  - Cuando se detecta una infracción, la liga emite una sanción a un club o jugador.
+  - La sanción puede ser de diferentes tipos (multa, suspensión, etc.).
+
+- **Sistema: Notificar sobre Sanciones**
+  - El sistema genera notificaciones para los clubes, jugadores, y otros involucrados sobre las sanciones emitidas.
+  - También se registra cualquier acción de seguimiento, como la desactivación de un jugador sancionado.
+
+### 4. Gestión de Campeonatos y Resultados
+- **Sistema: Gestionar Historial de Campeonatos**
+  - Se registran los resultados de los campeonatos, incluyendo los campeones, subcampeones, y otros detalles relevantes.
+
+- **Sistema: Generar Reportes de Actividades**
+  - El sistema genera reportes periódicos sobre transferencias, sanciones, resultados de campeonatos, y otras actividades.
+
+### 5. Administración de Usuarios y Permisos
+- **Administrador: Configurar Permisos y Roles**
+  - El administrador gestiona los permisos de acceso para los diferentes roles de usuario (Administrador, Delegado, Invitado).
+  - Asigna permisos para crear, modificar, o visualizar diferentes entidades dentro del sistema.
+
+- **Administrador: Administrar Usuarios y Delegados**
+  - El administrador puede agregar, modificar o eliminar usuarios.
+  - También puede asignar o revocar los permisos de delegado a usuarios de un club específico.
 
 ---
 

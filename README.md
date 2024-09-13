@@ -151,6 +151,17 @@ La arquitectura del backend de Gesliga está basada en una estructura de microse
 - **phone_number**: Número de teléfono
 - **status**: Estado
 
+## Relaciones entre Entidades
+
+- **League** tiene una relación de uno a muchos con **Club**. Cada club pertenece a una liga.
+- **Club** tiene una relación de uno a muchos con **Player** a través de **Pass**. Un jugador puede estar asociado a un club mediante un pase.
+- **Club** también tiene una relación de uno a muchos con **Sanction**. Una sanción puede ser aplicada a un club.
+- **Player** tiene una relación de uno a uno con **Pass**. Cada pase está asociado a un único jugador.
+- **Player** y **Club** están relacionados a través de **Request**. Las solicitudes de transferencia o liberación están asociadas a jugadores y clubes.
+- **Sanction** puede estar asociada a un **Player** o a un **Club**. Las sanciones pueden ser aplicadas a jugadores o clubes.
+- **Notification** está asociada a un **User**. Las notificaciones son enviadas a los usuarios.
+- **Champion** tiene relaciones de muchos a uno con **Club** para el club campeón y el subcampeón.
+
 ## Roles de Usuarios y Permisos
 
 - **Administrador**: Tiene acceso completo para gestionar todas las entidades del sistema, incluyendo la creación, modificación y eliminación de ligas, clubes, jugadores y usuarios.

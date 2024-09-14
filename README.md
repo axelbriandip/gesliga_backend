@@ -8,7 +8,6 @@
 
 La arquitectura del backend de Gesliga está basada en una estructura de microservicios, con los siguientes componentes clave:
 
-- **Servidor de Aplicaciones**: Maneja las solicitudes de los clientes, ejecuta la lógica de negocio y se comunica con la base de datos.
 - **Base de Datos**: Almacena toda la información relacionada con ligas, clubes, jugadores, sanciones, y más. Utiliza un sistema de gestión de bases de datos relacional (PostgreSQL).
 - **API**: Proporciona endpoints para interactuar con la aplicación, permitiendo operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre las entidades del sistema.
 - **Servicios de Autenticación**: Gestiona la autenticación y autorización de usuarios, asegurando que solo los usuarios con los permisos adecuados puedan acceder a ciertas funcionalidades.
@@ -28,10 +27,10 @@ La arquitectura del backend de Gesliga está basada en una estructura de microse
 - **country**: País
 - **phone_number**: Número de teléfono
 - **email_address**: Correo electrónico
-- **link_instagram**: Enlace al perfil de Instagram
-- **link_facebook**: Enlace al perfil de Facebook
-- **link_whatsapp**: Enlace a WhatsApp
-- **link_website**: Enlace al sitio web
+- **instagram**: Enlace al perfil de Instagram
+- **facebook**: Enlace al perfil de Facebook
+- **whatsapp**: Enlace a WhatsApp
+- **website**: Enlace al sitio web
 - **primary_color**: Color principal
 - **secondary_color**: Color secundario
 - **status**: Estado
@@ -44,12 +43,13 @@ La arquitectura del backend de Gesliga está basada en una estructura de microse
 - **abb_name**: Nombre abreviado en tres letras
 - **primary_color**: Color principal
 - **secondary_color**: Color secundario
-- **president_name**: Nombre del presidente
+- **president_first_name**: Nombre del presidente
+- **president_last_name**: Apellido del presidente
 - **president_contact**: Información de contacto del presidente
 - **history**: Historia del club
-- **link_instagram**: Enlace al perfil de Instagram
-- **link_facebook**: Enlace al perfil de Facebook
-- **link_website**: Enlace al sitio web
+- **instagram**: Enlace al perfil de Instagram
+- **facebook**: Enlace al perfil de Facebook
+- **website**: Enlace al sitio web
 - **status**: Estado
 - **league_id**: Identificador de la liga (FK a League)
 - **delegate_id**: Identificador del delegado (FK a User)
@@ -82,8 +82,8 @@ La arquitectura del backend de Gesliga está basada en una estructura de microse
 ### Request
 
 - **id**: Identificador único
-- **request_type**: Tipo de solicitud (Transferencia, Liberación)
-- **request_status**: Estado de la solicitud
+- **type**: Tipo de solicitud (Transferencia, Liberación)
+- **req_status**: Estado de la solicitud
 - **created_at**: Fecha de creación
 - **notes**: Notas adicionales
 - **status**: Estado

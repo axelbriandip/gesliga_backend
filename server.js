@@ -4,6 +4,8 @@ const helmet = require('helmet')
 const compression = require('compression')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
+const { db } = require('./utils/db.util')
+const { initModels } = require('./models/initModels')
 
 const app = express()
 
@@ -11,14 +13,20 @@ app.use(express.json())
 app.use(helmet())
 app.use(compression())
 
-dotenv.config({ path: './config.env' })
+dotenv.config()
 
 if(process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 else if(process.env.NODE_ENV === 'production') app.use(morgan('combined'))
 
 const startServer = async () => {
     try {
-        console.log('Entró a startServer()!');
+        await db.authenticate()
+        initModels()
+        await db.sync()
+        
+        app.listen(process.env.DB_PORT, () => {
+            console.log('Express app running in port ', process.env.DB_PORT);
+        })
     } catch (err) {
         console.log(err);
     }

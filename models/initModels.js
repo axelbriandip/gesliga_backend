@@ -7,6 +7,7 @@ const { Notification } = require('./notification_entry.model')
 const { Pass } = require('./pass.model')
 const { Sanction } = require('./sanction.model')
 const { League } = require('./league.model')
+const { Champion } = require('./champion.model')
 
 // relations
 const initModels = () => {

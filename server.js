@@ -20,9 +20,14 @@ else if(process.env.NODE_ENV === 'production') app.use(morgan('combined'))
 
 const startServer = async () => {
     try {
-        await db.authenticate()
-        initModels()
-        await db.sync()
+        await db.authenticate();
+        console.log('Database authenticated successfully.');
+
+        initModels();
+
+        await db.sync({ force:true });
+        // { force: true } borra y recrea las tablas en cada inicio
+        console.log('Database synced successfully.');
         
         app.listen(process.env.DB_PORT, () => {
             console.log('Express app running in port ', process.env.DB_PORT);

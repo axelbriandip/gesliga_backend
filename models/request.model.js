@@ -57,6 +57,7 @@ const Request = db.define('request', {
         }
     },
 }, {
+    tableName: 'request',
     timestamps: true //add createdAt and updatedAt
 })
 

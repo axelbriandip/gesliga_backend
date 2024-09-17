@@ -32,12 +32,11 @@ const User = db.define('user', {
         allowNull: false
     },
     role: {
-        type: DataTypes.STRING,
         type: DataTypes.ENUM('admin', 'delegate', 'guest'),
         allowNull: false
     },
     last_login: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false
     },
@@ -50,6 +49,7 @@ const User = db.define('user', {
         defaultValue: true
     }
 }, {
+    tableName: 'user', // Esto fuerza a que la tabla se llame 'user' en vez de 'users'
     timestamps: true //add createdAt and updatedAt
 })
 

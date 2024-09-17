@@ -69,6 +69,7 @@ const Sanction = db.define('sanction', {
         }
     },
 }, {
+    tableName: 'sanction',
     timestamps: true //add createdAt and updatedAt
 })
 

@@ -86,6 +86,7 @@ const League = db.define('league', {
         defaultValue: true
     }
 }, {
+    tableName: 'league',
     timestamps: true //add createdAt and updatedAt
 })
 

@@ -33,6 +33,7 @@ const Notification = db.define('notification', {
         }
     }
 }, {
+    tableName: 'notification',
     timestamps: true //add createdAt and updatedAt
 })
 

@@ -62,6 +62,7 @@ const Champion = db.define('champion', {
         }
     },
 }, {
+    tableName: 'champion',
     timestamps: true //add createdAt and updatedAt
 })
 

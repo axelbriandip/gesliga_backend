@@ -30,6 +30,7 @@ const Pass = db.define('pass', {
         }
     }
 }, {
+    tableName: 'pass',
     timestamps: true //add createdAt and updatedAt
 })
 

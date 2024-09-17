@@ -71,6 +71,7 @@ const Player = db.define('player', {
         }
     }
 }, {
+    tableName: 'player',
     timestamps: true //add createdAt and updatedAt
 })
 

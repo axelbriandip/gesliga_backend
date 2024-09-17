@@ -94,6 +94,7 @@ const Club = db.define('club', {
         allowNull: false,
     },
 }, {
+    tableName: 'club',
     timestamps: true //add createdAt and updatedAt
 })
 

@@ -1,5 +1,6 @@
 // import models
 const { User } = require('./user.model')
+const { Club } = require('./club.model')
 
 // relations
 const initModels = () => {

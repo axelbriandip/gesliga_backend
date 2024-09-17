@@ -6,12 +6,14 @@ const morgan = require('morgan')
 const dotenv = require('dotenv')
 const { db } = require('./utils/db.util')
 const { initModels } = require('./models/initModels')
+const { globalErrorHandler } = require('./controllers/error.controller')
 
 const app = express()
 
 app.use(express.json())
 app.use(helmet())
 app.use(compression())
+app.use(globalErrorHandler);
 
 dotenv.config()
 
@@ -36,5 +38,15 @@ const startServer = async () => {
         console.log(err);
     }
 }
+
+// insert endpoints exists
+
+// catch not-existings endpoints
+app.all('*', (req, res) => {
+    res.status(404).json({
+        status: 'error',
+        message: `${req.method} ${req.url} does not exists in our server`,
+    });
+});
 
 startServer()

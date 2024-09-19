@@ -11,6 +11,7 @@ const { globalErrorHandler } = require('./controllers/error.controller')
 // routers
 const { usersRouter } = require('./routes/users.routes')
 const { playersRouter } = require('./routes/players.routes')
+const { clubsRouter } = require('./routes/clubs.routes')
 
 const app = express()
 
@@ -48,6 +49,7 @@ const startServer = async () => {
 // insert endpoints exists
 app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/players', playersRouter)
+app.use('/api/v1/clubs', clubsRouter)
 
 // catch not-existings endpoints
 app.all('*', (req, res) => {

@@ -69,6 +69,7 @@ const updateUser = catchAsync(async(req, res,next) => {
         });
     }
 
+    // receive data
     const {
         username,
         password,
@@ -80,6 +81,7 @@ const updateUser = catchAsync(async(req, res,next) => {
         phone_number
     } = req.body
     
+    // update
     const userUpdated = await userToUpdate.update({
         username: username || userToUpdate.username,
         password: password || userToUpdate.password,
@@ -99,7 +101,27 @@ const updateUser = catchAsync(async(req, res,next) => {
 })
 
 const deleteUser = catchAsync(async(req, res,next) => {
-    // block code
+    const { id } = req.params;
+
+    // search for id
+    const userToDelete = await User.findOne({ where: { id } });
+
+    // if not exists
+    if (!userToDelete) {
+        return res.status(404).json({
+            status: 'error',
+            message: 'User not found'
+        });
+    }
+
+    // soft delete
+    const userDeleted = await userToDelete.update({ is_active: false })
+
+    // user updated
+    res.status(200).json({
+        status: 'success',
+        data: { userDeleted }
+    });
 })
 
 module.exports = {

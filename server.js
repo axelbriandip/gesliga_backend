@@ -7,7 +7,10 @@ const dotenv = require('dotenv')
 const { db } = require('./utils/db.util')
 const { initModels } = require('./models/initModels')
 const { globalErrorHandler } = require('./controllers/error.controller')
+
+// routers
 const { usersRouter } = require('./routes/users.routes')
+const { playersRouter } = require('./routes/players.routes')
 
 const app = express()
 
@@ -44,6 +47,7 @@ const startServer = async () => {
 
 // insert endpoints exists
 app.use('/api/v1/users', usersRouter)
+app.use('/api/v1/players', playersRouter)
 
 // catch not-existings endpoints
 app.all('*', (req, res) => {

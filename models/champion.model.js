@@ -41,7 +41,7 @@ const Champion = db.define('champion', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    isActive: {
+    is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },

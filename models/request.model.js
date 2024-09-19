@@ -20,7 +20,7 @@ const Request = db.define('request', {
         type: DataTypes.TEXT,
         allowNull: true, // Puedes hacerlo opcional si es que no siempre se requiere
     },
-    isActive: {
+    is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },

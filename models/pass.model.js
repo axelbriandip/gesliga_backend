@@ -17,7 +17,7 @@ const Pass = db.define('pass', {
         type: DataTypes.DATEONLY,
         allowNull: false
     },
-    isActive: {
+    is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },

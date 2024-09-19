@@ -44,7 +44,7 @@ const User = db.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    isActive: {
+    is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     }

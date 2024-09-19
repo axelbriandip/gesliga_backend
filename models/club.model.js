@@ -81,7 +81,7 @@ const Club = db.define('club', {
             isUrl: true
         }
     },
-    isActive: {
+    is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
     },

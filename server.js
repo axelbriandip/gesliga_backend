@@ -7,6 +7,7 @@ const dotenv = require('dotenv')
 const { db } = require('./utils/db.util')
 const { initModels } = require('./models/initModels')
 const { globalErrorHandler } = require('./controllers/error.controller')
+const { usersRouter } = require('./routes/users.routes')
 
 const app = express()
 
@@ -27,12 +28,14 @@ const startServer = async () => {
 
         initModels();
 
-        await db.sync({ force:true });
+        await db.sync();
+        // await db.sync({ force:true });
         // { force: true } borra y recrea las tablas en cada inicio
         console.log('Database synced successfully.');
         
-        app.listen(process.env.DB_PORT, () => {
-            console.log('Express app running in port ', process.env.DB_PORT);
+        // app.listen(process.env.DB_PORT || 3000, () => {
+        app.listen(3000, () => {
+            console.log('Express app running in port', 3000);
         })
     } catch (err) {
         console.log(err);
@@ -40,6 +43,7 @@ const startServer = async () => {
 }
 
 // insert endpoints exists
+app.use('/api/v1/users', usersRouter)
 
 // catch not-existings endpoints
 app.all('*', (req, res) => {

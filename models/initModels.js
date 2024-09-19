@@ -45,7 +45,6 @@ const initModels = () => {
     // Champion has many-to-one relationships with Club for champion and runner-up
     Champion.belongsTo(Club, { foreignKey: 'champion_club_id', as: 'ChampionClub' });
     Champion.belongsTo(Club, { foreignKey: 'runner_up_club_id', as: 'RunnerUpClub' });
-    console.log('9');
 }
 
 module.exports = { initModels }

@@ -10,9 +10,9 @@ const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllUsers = catchAsync(async(req, res, next) => {
-    const users = await User.findAll()
+    const users = await User.findAll({ where: { is_active: true } })
 
-    res.status(201).json({
+    res.status(200).json({
         status: 'success',
         data: { users }
     })
@@ -22,7 +22,7 @@ const getUser = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findOne({ where: { id, is_active: true } });
 
     // if not exists
     if (!user) {
@@ -80,7 +80,7 @@ const updateUser = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const userToUpdate = await User.findOne({ where: { id } });
+    const userToUpdate = await User.findOne({ where: { id, is_active: true } });
 
     // if not exists
     if (!userToUpdate) {
@@ -102,10 +102,17 @@ const updateUser = catchAsync(async(req, res,next) => {
         phone_number
     } = req.body
     
+    // encrypt password
+    let hashedPassword = userToUpdate.password;
+    if (password) {
+        const salt = await bcrypt.genSalt(12);
+        hashedPassword = await bcrypt.hash(password, salt);
+    }
+
     // update
     const userUpdated = await userToUpdate.update({
         username: username || userToUpdate.username,
-        password: password || userToUpdate.password,
+        password: hashedPassword,
         email: email || userToUpdate.email,
         first_name: first_name || userToUpdate.first_name,
         last_name: last_name || userToUpdate.last_name,
@@ -113,6 +120,8 @@ const updateUser = catchAsync(async(req, res,next) => {
         last_login: last_login || userToUpdate.last_login,
         phone_number: phone_number || userToUpdate.phone_number
     })
+
+    userUpdated.password = undefined
 
     // user updated
     res.status(200).json({
@@ -125,7 +134,7 @@ const deleteUser = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const userToDelete = await User.findOne({ where: { id } });
+    const userToDelete = await User.findOne({ where: { id, is_active: true } });
 
     // if not exists
     if (!userToDelete) {

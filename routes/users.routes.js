@@ -4,7 +4,8 @@ const {
     getAllUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUser
 } = require('../controllers/users.controller')
 
 // insert middlewares
@@ -12,6 +13,7 @@ const {
 const usersRouter = express.Router()
 
 usersRouter.get('/', getAllUsers)
+usersRouter.get('/:id', getUser)
 usersRouter.post('/', createUser)
 usersRouter.put('/update/:id', updateUser)
 usersRouter.put('/delete/:id', deleteUser) // soft delete

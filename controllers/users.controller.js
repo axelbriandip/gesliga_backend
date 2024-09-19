@@ -18,6 +18,27 @@ const getAllUsers = catchAsync(async(req, res, next) => {
     })
 })
 
+const getUser = catchAsync(async(req, res,next) => {
+    const { id } = req.params;
+
+    // search for id
+    const user = await User.findOne({ where: { id } });
+
+    // if not exists
+    if (!user) {
+        return res.status(404).json({
+            status: 'error',
+            message: 'User not found'
+        });
+    }
+
+    // response
+    res.status(200).json({
+        status: 'success',
+        data: { user }
+    });
+})
+
 const createUser = catchAsync(async(req, res,next) => {
     // receive data
     const {
@@ -128,5 +149,6 @@ module.exports = {
     getAllUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUser
 }

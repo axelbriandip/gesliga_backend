@@ -13,6 +13,7 @@ const { usersRouter } = require('./routes/users.routes')
 const { playersRouter } = require('./routes/players.routes')
 const { clubsRouter } = require('./routes/clubs.routes')
 const { leaguesRouter } = require('./routes/leagues.routes')
+const { notificationsRouter } = require('./routes/notifications.routes')
 
 const app = express()
 
@@ -52,6 +53,7 @@ app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/players', playersRouter)
 app.use('/api/v1/clubs', clubsRouter)
 app.use('/api/v1/clubs', leaguesRouter)
+app.use('/api/v1/clubs', notificationsRouter)
 
 // catch not-existings endpoints
 app.all('*', (req, res) => {

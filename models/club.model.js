@@ -26,16 +26,16 @@ const Club = db.define('club', {
     primary_color: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            is: /^#[0-9A-F]{6}$/i // Validación para hexadecimal
-        }
+        // validate: {
+        //     is: /^#[0-9A-F]{6}$/i // Validación para hexadecimal
+        // }
     },
     secondary_color: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            is: /^#[0-9A-F]{6}$/i
-        }
+        // validate: {
+        //     is: /^#[0-9A-F]{6}$/i
+        // }
     },    
     president_first_name: {
         type: DataTypes.STRING(50),
@@ -56,30 +56,30 @@ const Club = db.define('club', {
     instagram: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isUrl: true
-        }
+        // validate: {
+        //     isUrl: true
+        // }
     },
     facebook: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isUrl: true
-        }
+        // validate: {
+        //     isUrl: true
+        // }
     },
     whatsapp: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            is: /^[0-9]+$/  // Valida que contenga solo números
-        }
+        // validate: {
+        //     is: /^[0-9]+$/  // Valida que contenga solo números
+        // }
     },
     website: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isUrl: true
-        }
+        // validate: {
+        //     isUrl: true
+        // }
     },
     is_active: {
         type: DataTypes.BOOLEAN,
@@ -91,7 +91,7 @@ const Club = db.define('club', {
     },
     delegate_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
 }, {
     tableName: 'club',

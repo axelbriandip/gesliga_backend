@@ -28,7 +28,15 @@ const Pass = db.define('pass', {
             model: 'club', // Nombre de la tabla relacionada
             key: 'id'
         }
-    }
+    },
+    player_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'player', // Nombre de la tabla relacionada
+            key: 'id'
+        }
+    },
 }, {
     tableName: 'pass',
     timestamps: true //add createdAt and updatedAt

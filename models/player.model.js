@@ -61,14 +61,6 @@ const Player = db.define('player', {
     is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
-    },
-    pass_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'pass', // Nombre de la tabla relacionada
-            key: 'id'
-        }
     }
 }, {
     tableName: 'player',

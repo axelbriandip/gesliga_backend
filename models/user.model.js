@@ -35,11 +35,6 @@ const User = db.define('user', {
         type: DataTypes.ENUM('admin', 'delegate', 'guest'),
         allowNull: false
     },
-    last_login: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
-    },
     phone_number: {
         type: DataTypes.STRING,
         allowNull: false

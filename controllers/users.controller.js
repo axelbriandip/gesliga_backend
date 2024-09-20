@@ -48,7 +48,6 @@ const createUser = catchAsync(async(req, res,next) => {
         first_name,
         last_name,
         role,
-        last_login,
         phone_number
     } = req.body
     
@@ -64,7 +63,6 @@ const createUser = catchAsync(async(req, res,next) => {
         first_name,
         last_name,
         role,
-        last_login,
         phone_number
     })
 
@@ -98,7 +96,6 @@ const updateUser = catchAsync(async(req, res,next) => {
         first_name,
         last_name,
         role,
-        last_login,
         phone_number
     } = req.body
     
@@ -117,7 +114,6 @@ const updateUser = catchAsync(async(req, res,next) => {
         first_name: first_name || userToUpdate.first_name,
         last_name: last_name || userToUpdate.last_name,
         role: role || userToUpdate.role,
-        last_login: last_login || userToUpdate.last_login,
         phone_number: phone_number || userToUpdate.phone_number
     })
 

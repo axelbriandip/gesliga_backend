@@ -12,6 +12,110 @@ La arquitectura del backend de Gesliga está basada en una estructura de microse
 - **API**: Proporciona endpoints para interactuar con la aplicación, permitiendo operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre las entidades del sistema.
 - **Servicios de Autenticación**: Gestiona la autenticación y autorización de usuarios, asegurando que solo los usuarios con los permisos adecuados puedan acceder a ciertas funcionalidades.
 
+## Casos de Uso
+
+### Casos de Uso para el Administrador
+
+1. **Gestionar Ligas**
+   - Crear una nueva liga.
+   - Editar los detalles de una liga.
+
+2. **Gestionar Clubes**
+   - Crear un nuevo club.
+   - Editar los detalles de un club.
+   - Eliminar un club.
+   - Ver la lista de clubes.
+
+3. **Gestionar Jugadores**
+   - Crear un nuevo jugador.
+   - Editar los detalles de un jugador.
+   - Eliminar un jugador.
+   - Ver la lista de jugadores.
+
+4. **Aprobar/Rechazar Solicitudes**
+   - Revisar solicitudes de transferencias o liberaciones.
+   - Aprobar o rechazar las solicitudes.
+
+5. **Gestionar Sanciones**
+   - Crear una sanción para un club o jugador.
+   - Editar una sanción.
+   - Eliminar una sanción.
+   - Ver sanciones activas e históricas.
+
+6. **Enviar Notificaciones**
+   - Enviar notificaciones a usuarios sobre aprobaciones, rechazos o sanciones.
+
+7. **Gestionar Usuarios**
+   - Crear, editar o eliminar usuarios.
+   - Asignar roles (Administrador, Delegado, Invitado).
+   - Ver la lista de usuarios.
+   - Suspender o reactivar cuentas de usuarios.
+
+8. **Ver Historial de Campeonatos**
+   - Consultar y editar los registros históricos de campeones.
+   - Agregar nuevos campeones o subcampeones por temporada.
+
+---
+
+### Casos de Uso para el Delegado
+
+1. **Gestionar Jugadores de su Club**
+   - Crear un nuevo jugador en su club.
+   - Editar los detalles de un jugador en su club.
+   - Eliminar un jugador de su club.
+   - Ver la lista de jugadores en su club.
+
+2. **Solicitar Transferencias o Liberaciones**
+   - Crear una solicitud de transferencia de un jugador a otro club.
+   - Crear una solicitud de liberación de un jugador.
+   - Ver el estado de solicitudes de transferencias o liberaciones.
+
+3. **Consultar Sanciones**
+   - Ver las sanciones activas e históricas aplicadas a su club o a jugadores de su club.
+
+4. **Recibir Notificaciones**
+   - Ver notificaciones de sanciones, transferencias aprobadas o rechazadas.
+
+5. **Actualizar Información del Club**
+   - Editar detalles del club como el presidente, colores, y redes sociales.
+
+6. **Consultar Historial de Campeonatos**
+   - Ver el historial de campeonatos y la posición del club en temporadas anteriores.
+
+---
+
+### Casos de Uso para el Invitado
+
+1. **Ver Clubes**
+   - Consultar la lista de clubes registrados.
+
+2. **Ver Jugadores**
+   - Consultar la lista de jugadores registrados.
+
+3. **Ver Historial de Campeonatos**
+   - Ver el historial de campeones y subcampeones de las ligas.
+
+4. **Ver Sanciones Públicas**
+   - Consultar sanciones activas aplicadas a clubes o jugadores.
+
+---
+
+### Casos de Uso Comunes
+
+1. **Iniciar Sesión**
+   - Los usuarios (Administrador, Delegado, Invitado) pueden iniciar sesión en la aplicación.
+
+2. **Registrarse**
+   - Los usuarios (Inicialmente como Invitado) pueden registrarse en la aplicación.
+   - Los usuarios pueden solicitar ser Delegados de un club.
+
+3. **Restablecer Contraseña**
+   - Solicitar el restablecimiento de contraseña en caso de olvido.
+
+4. **Recibir Notificaciones**
+   - Recibir notificaciones relacionadas con el usuario, dependiendo de su rol.
+
+
 ## Entidades y sus Relaciones
 
 ### League

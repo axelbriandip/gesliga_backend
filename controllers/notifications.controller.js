@@ -5,12 +5,22 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const { Notification } = require('../models/notification_entry.model')
+const { User } = require('../models/user.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllNotifications = catchAsync(async(req, res, next) => {
-    const notifications = await Notification.findAll({ where: { is_active: true } })
+    const notifications = await Notification.findAll({
+        where: { is_active: true },
+        include: [
+            {
+                model: User,
+                as: 'user',
+                attributes: ['id', 'username', 'first_name', 'last_name']
+            }
+        ]
+    })
 
     res.status(200).json({
         status: 'success',
@@ -22,7 +32,16 @@ const getNotification = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const notification = await Notification.findOne({ where: { id, is_active: true } });
+    const notification = await Notification.findOne({
+        where: { id, is_active: true },
+        include: [
+            {
+                model: User,
+                as: 'user',
+                attributes: ['id', 'username', 'first_name', 'last_name']
+            }
+        ]
+    });
 
     // if not exists
     if (!notification) {

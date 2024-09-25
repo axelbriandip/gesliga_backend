@@ -5,6 +5,8 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const { Sanction } = require('../models/sanction.model')
+const { Club } = require('../models/club.model')
+const { Player } = require('../models/player.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
@@ -110,18 +112,18 @@ const updateSanction = catchAsync(async(req, res,next) => {
     
     // update
     const sanctionUpdated = await sanctionToUpdate.update({
-        type: type || userToUpdate.type,
-        target: target || userToUpdate.target,
-        reason: reason || userToUpdate.reason,
-        description: description || userToUpdate.description,
-        issue_date: issue_date || userToUpdate.issue_date,
-        start_date: start_date || userToUpdate.start_date,
-        end_date: end_date || userToUpdate.end_date,
-        status: status || userToUpdate.status,
-        amount: amount || userToUpdate.amount,
-        severity: severity || userToUpdate.severity,
-        player_id: player_id || userToUpdate.player_id,
-        club_id: club_id || userToUpdate.club_id,
+        type: type || sanctionToUpdate.type,
+        target: target || sanctionToUpdate.target,
+        reason: reason || sanctionToUpdate.reason,
+        description: description || sanctionToUpdate.description,
+        issue_date: issue_date || sanctionToUpdate.issue_date,
+        start_date: start_date || sanctionToUpdate.start_date,
+        end_date: end_date || sanctionToUpdate.end_date,
+        status: status || sanctionToUpdate.status,
+        amount: amount || sanctionToUpdate.amount,
+        severity: severity || sanctionToUpdate.severity,
+        player_id: player_id || sanctionToUpdate.player_id,
+        club_id: club_id || sanctionToUpdate.club_id,
     })
 
     // sanction updated

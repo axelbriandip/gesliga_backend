@@ -54,7 +54,7 @@ const Sanction = db.define('sanction', {
     },
     player_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'player', // Nombre de la tabla relacionada
             key: 'id'
@@ -62,7 +62,7 @@ const Sanction = db.define('sanction', {
     },
     club_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'club', // Nombre de la tabla relacionada
             key: 'id'

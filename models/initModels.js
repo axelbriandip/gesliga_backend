@@ -14,14 +14,7 @@ const initModels = () => {
     // Notification is associated with User
     User.hasMany(Notification, { foreignKey: 'user_id' });
     Notification.belongsTo(User, { foreignKey: 'user_id' });
-    
-    // Club has many Sanctions
-    Club.hasMany(Sanction, { foreignKey: 'club_id' });
-    Sanction.belongsTo(Club, { foreignKey: 'club_id' });
-
-    // Sanction can be associated with a Player or a Club
-    Sanction.belongsTo(Player, { foreignKey: 'player_id', constraints: false });
-    
+        
     // Player and Club are related through Request
     Club.hasMany(Request, { foreignKey: 'club_id' });
     Request.belongsTo(Club, { foreignKey: 'club_id' });
@@ -55,6 +48,18 @@ const initModels = () => {
     Pass.belongsTo(Club, {
         foreignKey: 'club_id',  // Clave foránea en Pass que apunta a Club
         as: 'club' // Alias para acceder a la Club desde Pass
+    });
+
+    // Un Sanction tiene un solo Player
+    Sanction.belongsTo(Player, {
+        foreignKey: 'player_id',  // Clave foránea en Sanction que apunta a Player
+        as: 'player' // Alias para acceder a la Player desde Sanction
+    });
+
+    // Un Sanction tiene un solo Club
+    Sanction.belongsTo(Club, {
+        foreignKey: 'club_id',  // Clave foránea en Sanction que apunta a Club
+        as: 'club' // Alias para acceder a la Club desde Sanction
     });
 }
 

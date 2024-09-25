@@ -12,7 +12,21 @@ const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllSanctions = catchAsync(async(req, res, next) => {
-    const sanction = await Sanction.findAll({ where: { is_active: true } })
+    const sanction = await Sanction.findAll({
+        where: { is_active: true },
+        include: [
+            {
+                model: Player,
+                as: 'player',
+                attributes: ['id', 'first_name', 'last_name', 'license_number']
+            },
+            {
+                model: Club,
+                as: 'club',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    })
 
     res.status(200).json({
         status: 'success',
@@ -24,7 +38,21 @@ const getSanction = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const sanction = await Sanction.findOne({ where: { id, is_active: true } });
+    const sanction = await Sanction.findOne({
+        where: { id, is_active: true },
+        include: [
+            {
+                model: Player,
+                as: 'player',
+                attributes: ['id', 'first_name', 'last_name', 'license_number']
+            },
+            {
+                model: Club,
+                as: 'club',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    });
 
     // if not exists
     if (!sanction) {

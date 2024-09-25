@@ -53,7 +53,6 @@ const createPlayer = catchAsync(async(req, res,next) => {
         contact_phone,
         dni,
         license_number,
-        pass_id
     } = req.body
         
     // create resource
@@ -69,7 +68,6 @@ const createPlayer = catchAsync(async(req, res,next) => {
         contact_phone,
         dni,
         license_number,
-        pass_id
     })
 
     res.status(201).json({
@@ -105,7 +103,6 @@ const updatePlayer = catchAsync(async(req, res,next) => {
         contact_phone,
         dni,
         license_number,
-        pass_id
     } = req.body
     
     // update
@@ -121,7 +118,6 @@ const updatePlayer = catchAsync(async(req, res,next) => {
         contact_phone: contact_phone || playerToUpdate.contact_phone,
         dni: dni || playerToUpdate.dni,
         license_number: license_number || playerToUpdate.license_number,
-        pass_id: pass_id || playerToUpdate.pass_id,
     })
 
     // user updated

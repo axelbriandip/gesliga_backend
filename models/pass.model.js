@@ -31,7 +31,8 @@ const Pass = db.define('pass', {
     },
     player_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        unique: true,
         references: {
             model: 'player', // Nombre de la tabla relacionada
             key: 'id'

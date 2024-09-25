@@ -5,6 +5,8 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const { Pass } = require('../models/pass.model')
+const { Club } = require('../models/club.model')
+const { Player } = require('../models/player.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
@@ -86,10 +88,10 @@ const updatePass = catchAsync(async(req, res,next) => {
     
     // update
     const passUpdated = await passToUpdate.update({
-        start_date: start_date || playerToUpdate.start_date,
-        end_date: end_date || playerToUpdate.end_date,
-        club_id: club_id || playerToUpdate.club_id,
-        player_id: player_id || playerToUpdate.player_id,
+        start_date: start_date || passToUpdate.start_date,
+        end_date: end_date || passToUpdate.end_date,
+        club_id: club_id || passToUpdate.club_id,
+        player_id: player_id || passToUpdate.player_id,
     })
 
     // user updated

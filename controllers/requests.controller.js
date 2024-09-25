@@ -5,12 +5,39 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const { Request } = require('../models/request.model')
+const { User } = require('../models/user.model')
+const { Player } = require('../models/player.model')
+const { Club } = require('../models/club.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllRequests = catchAsync(async(req, res, next) => {
-    const requests = await Request.findAll({ where: { is_active: true } })
+    const requests = await Request.findAll({
+        where: { is_active: true },
+        include: [
+            {
+                model: User,
+                as: 'creator',
+                attributes: ['id', 'first_name', 'last_name']
+            },
+            {
+                model: Player,
+                as: 'player',
+                attributes: ['id', 'first_name', 'last_name', 'license_number']
+            },
+            {
+                model: Club,
+                as: 'originClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            },
+            {
+                model: Club,
+                as: 'destinationClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    })
 
     res.status(200).json({
         status: 'success',
@@ -22,7 +49,31 @@ const getRequest = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const request = await Request.findOne({ where: { id, is_active: true } });
+    const request = await Request.findOne({
+        where: { id, is_active: true },
+        include: [
+            {
+                model: User,
+                as: 'creator',
+                attributes: ['id', 'first_name', 'last_name']
+            },
+            {
+                model: Player,
+                as: 'player',
+                attributes: ['id', 'first_name', 'last_name', 'license_number']
+            },
+            {
+                model: Club,
+                as: 'originClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            },
+            {
+                model: Club,
+                as: 'destinationClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    });
 
     // if not exists
     if (!request) {

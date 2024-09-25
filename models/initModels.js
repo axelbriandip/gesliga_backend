@@ -11,13 +11,6 @@ const { Champion } = require('./champion.model')
 
 // relations
 const initModels = () => {
-    // Player and Club are related through Request
-    Club.hasMany(Request, { foreignKey: 'club_id' });
-    Request.belongsTo(Club, { foreignKey: 'club_id' });
-    
-    Player.hasMany(Request, { foreignKey: 'player_id' });
-    Request.belongsTo(Player, { foreignKey: 'player_id' });
-    
     // Champion has many-to-one relationships with Club for champion and runner-up
     Champion.belongsTo(Club, { foreignKey: 'champion_club_id', as: 'ChampionClub' });
     Champion.belongsTo(Club, { foreignKey: 'runner_up_club_id', as: 'RunnerUpClub' });
@@ -62,6 +55,30 @@ const initModels = () => {
     Notification.belongsTo(User, {
         foreignKey: 'user_id',  // Clave foránea en Notification que apunta a User
         as: 'user' // Alias para acceder a la User desde Notification
+    });
+
+     // Relación entre Request y User
+     Request.belongsTo(User, {
+        foreignKey: 'created_by',
+        as: 'creator' // Alias para la relación
+    });
+
+    // Relación entre Request y Player
+    Request.belongsTo(Player, {
+        foreignKey: 'player_id',
+        as: 'player'
+    });
+
+    // Relación entre Request y Club para el club de origen
+    Request.belongsTo(Club, {
+        foreignKey: 'origin_club_id',
+        as: 'originClub'
+    });
+
+    // Relación entre Request y Club para el club de destino
+    Request.belongsTo(Club, {
+        foreignKey: 'destination_club_id',
+        as: 'destinationClub'
     });
 }
 

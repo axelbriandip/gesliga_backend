@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const { Champion } = require('../models/champion.model')
+const { Club } = require('../models/club.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
@@ -104,16 +105,16 @@ const updateChampion = catchAsync(async(req, res,next) => {
     
     // update
     const championUpdated = await championToUpdate.update({
-        title: title || userToUpdate.title,
-        season: season || userToUpdate.season,
-        description: description || userToUpdate.description,
-        award_date: award_date || userToUpdate.award_date,
-        goals_champion: goals_champion || userToUpdate.goals_champion,
-        goals_runner_up: goals_runner_up || userToUpdate.goals_runner_up,
-        penalties_champion: penalties_champion || userToUpdate.penalties_champion,
-        penalties_runner_up: penalties_runner_up || userToUpdate.penalties_runner_up,
-        champion_club_id: champion_club_id || userToUpdate.champion_club_id,
-        runner_up_club_id: runner_up_club_id || userToUpdate.runner_up_club_id,
+        title: title || championToUpdate.title,
+        season: season || championToUpdate.season,
+        description: description || championToUpdate.description,
+        award_date: award_date || championToUpdate.award_date,
+        goals_champion: goals_champion || championToUpdate.goals_champion,
+        goals_runner_up: goals_runner_up || championToUpdate.goals_runner_up,
+        penalties_champion: penalties_champion || championToUpdate.penalties_champion,
+        penalties_runner_up: penalties_runner_up || championToUpdate.penalties_runner_up,
+        champion_club_id: champion_club_id || championToUpdate.champion_club_id,
+        runner_up_club_id: runner_up_club_id || championToUpdate.runner_up_club_id,
     })
 
     // champion updated

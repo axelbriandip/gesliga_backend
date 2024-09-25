@@ -12,7 +12,21 @@ const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllPasses = catchAsync(async(req, res, next) => {
-    const passes = await Pass.findAll({ where: { is_active: true } })
+    const passes = await Pass.findAll({
+        where: { is_active: true },
+        include: [
+            {
+                model: Player,
+                as: 'player',
+                attributes: ['id', 'first_name', 'last_name', 'license_number']
+            },
+            {
+                model: Club,
+                as: 'club',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    })
 
     res.status(200).json({
         status: 'success',
@@ -24,7 +38,21 @@ const getPass = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const pass = await Pass.findOne({ where: { id, is_active: true } });
+    const pass = await Pass.findOne({
+        where: { id, is_active: true },
+        include: [
+            {
+                model: Player,
+                as: 'player',
+                attributes: ['id', 'first_name', 'last_name', 'license_number']
+            },
+            {
+                model: Club,
+                as: 'club',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    });
 
     // if not exists
     if (!pass) {

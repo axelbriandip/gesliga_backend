@@ -10,11 +10,7 @@ const { League } = require('./league.model')
 const { Champion } = require('./champion.model')
 
 // relations
-const initModels = () => {    
-    // Notification is associated with User
-    User.hasMany(Notification, { foreignKey: 'user_id' });
-    Notification.belongsTo(User, { foreignKey: 'user_id' });
-        
+const initModels = () => {
     // Player and Club are related through Request
     Club.hasMany(Request, { foreignKey: 'club_id' });
     Request.belongsTo(Club, { foreignKey: 'club_id' });
@@ -60,6 +56,12 @@ const initModels = () => {
     Sanction.belongsTo(Club, {
         foreignKey: 'club_id',  // Clave foránea en Sanction que apunta a Club
         as: 'club' // Alias para acceder a la Club desde Sanction
+    });
+
+    // Un Notification tiene un solo User
+    Notification.belongsTo(User, {
+        foreignKey: 'user_id',  // Clave foránea en Notification que apunta a User
+        as: 'user' // Alias para acceder a la User desde Notification
     });
 }
 

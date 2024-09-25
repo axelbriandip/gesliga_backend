@@ -113,22 +113,22 @@ const updateLeague = catchAsync(async(req, res,next) => {
     
     // update
     const leagueUpdated = await leagueToUpdate.update({
-        full_name: full_name || playerToUpdate.full_name,
-        short_name: short_name || playerToUpdate.short_name,
-        foundation_date: foundation_date || playerToUpdate.foundation_date,
-        description: description || playerToUpdate.description,
-        address: address || playerToUpdate.address,
-        city: city || playerToUpdate.city,
-        state: state || playerToUpdate.state,
-        country: country || playerToUpdate.country,
-        phone_number: phone_number || playerToUpdate.phone_number,
-        email_address: email_address || playerToUpdate.email_address,
-        instagram: instagram || playerToUpdate.instagram,
-        facebook: facebook || playerToUpdate.facebook,
-        whatsapp: whatsapp || playerToUpdate.whatsapp,
-        website: website || playerToUpdate.website,
-        primary_color: primary_color || playerToUpdate.primary_color,
-        secondary_color: secondary_color || playerToUpdate.secondary_color
+        full_name: full_name || leagueToUpdate.full_name,
+        short_name: short_name || leagueToUpdate.short_name,
+        foundation_date: foundation_date || leagueToUpdate.foundation_date,
+        description: description || leagueToUpdate.description,
+        address: address || leagueToUpdate.address,
+        city: city || leagueToUpdate.city,
+        state: state || leagueToUpdate.state,
+        country: country || leagueToUpdate.country,
+        phone_number: phone_number || leagueToUpdate.phone_number,
+        email_address: email_address || leagueToUpdate.email_address,
+        instagram: instagram || leagueToUpdate.instagram,
+        facebook: facebook || leagueToUpdate.facebook,
+        whatsapp: whatsapp || leagueToUpdate.whatsapp,
+        website: website || leagueToUpdate.website,
+        primary_color: primary_color || leagueToUpdate.primary_color,
+        secondary_color: secondary_color || leagueToUpdate.secondary_color
     })
 
     // user updated

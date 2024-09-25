@@ -37,8 +37,8 @@ const startServer = async () => {
 
         initModels();
 
-        // await db.sync();
-        await db.sync({ force:true });
+        await db.sync();
+        // await db.sync({ force:true });
         // { force: true } borra y recrea las tablas en cada inicio
         console.log('Database synced successfully.');
         

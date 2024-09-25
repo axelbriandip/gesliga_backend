@@ -5,12 +5,28 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const { Club } = require('../models/club.model')
+const { User } = require('../models/user.model')
+const { League } = require('../models/league.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllClubs = catchAsync(async(req, res, next) => {
-    const clubs = await Club.findAll({ where: { is_active: true } })
+    const clubs = await Club.findAll({
+        where: { is_active: true },
+        include: [
+            {
+                model: User,
+                as: 'delegate',  // Utiliza el alias 'delegate'
+                attributes: ['id', 'username', 'email', 'first_name', 'last_name', 'phone_number'] // Los datos que deseas incluir del delegado
+            },
+            {
+                model: League,
+                as: 'league',  // Utiliza el alias 'delegate'
+                attributes: ['id', 'full_name', "short_name"] // Los datos que deseas incluir del delegado
+            }
+        ]
+    })
 
     res.status(200).json({
         status: 'success',
@@ -22,7 +38,22 @@ const getClub = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const club = await Club.findOne({ where: { id, is_active: true } });
+    // const club = await Club.findOne({ where: { id, is_active: true } });
+    const club = await Club.findOne({
+        where: { id, is_active: true },
+        include: [
+            {
+                model: User,
+                as: 'delegate',  // Utiliza el alias 'delegate'
+                attributes: ['id', 'username', 'email', 'first_name', 'last_name', 'phone_number'] // Los datos que deseas incluir del delegado
+            },
+            {
+                model: League,
+                as: 'league',  // Utiliza el alias 'delegate'
+                attributes: ['id', 'full_name', "short_name"] // Los datos que deseas incluir del delegado
+            }
+        ]
+    });
 
     // if not exists
     if (!club) {

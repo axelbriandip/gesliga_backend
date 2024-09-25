@@ -17,7 +17,7 @@ const {
 
 const usersRouter = express.Router()
 
-usersRouter.post('/', createUser) // sign up
+usersRouter.post('/signUp', createUser) // sign up
 // insert endpoint login
 
 // Protecting below endpoints

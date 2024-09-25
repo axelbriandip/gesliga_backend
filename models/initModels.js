@@ -15,10 +15,6 @@ const initModels = () => {
     User.hasMany(Notification, { foreignKey: 'user_id' });
     Notification.belongsTo(User, { foreignKey: 'user_id' });
         
-    // League has many Clubs
-    League.hasMany(Club, { foreignKey: 'league_id' });
-    Club.belongsTo(League, { foreignKey: 'league_id' });
-    
     // Club has many Passes (related to Players)
     Club.hasMany(Pass, { foreignKey: 'club_id' });
     Pass.belongsTo(Club, { foreignKey: 'club_id' });
@@ -45,6 +41,18 @@ const initModels = () => {
     // Champion has many-to-one relationships with Club for champion and runner-up
     Champion.belongsTo(Club, { foreignKey: 'champion_club_id', as: 'ChampionClub' });
     Champion.belongsTo(Club, { foreignKey: 'runner_up_club_id', as: 'RunnerUpClub' });
+
+    // Un Club tiene un Delegado (User)
+    Club.belongsTo(User, {
+        foreignKey: 'delegate_id',  // Clave foránea en Club que apunta a User
+        as: 'delegate' // Alias para acceder al delegado desde Club
+    });
+
+    // Un Club tiene una sola Liga (League)
+    Club.belongsTo(League, {
+        foreignKey: 'league_id',  // Clave foránea en Club que apunta a League
+        as: 'league' // Alias para acceder a la Liga desde Club
+    });
 }
 
 module.exports = { initModels }

@@ -11,7 +11,21 @@ const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
 const getAllChampions = catchAsync(async(req, res, next) => {
-    const champions = await Champion.findAll({ where: { is_active: true } })
+    const champions = await Champion.findAll({
+        where: { is_active: true },
+        include: [
+            {
+                model: Club,
+                as: 'ChampionClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            },
+            {
+                model: Club,
+                as: 'RunnerUpClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    })
 
     res.status(200).json({
         status: 'success',
@@ -23,7 +37,21 @@ const getChampion = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const champion = await Champion.findOne({ where: { id, is_active: true } });
+    const champion = await Champion.findOne({
+        where: { id, is_active: true },
+        include: [
+            {
+                model: Club,
+                as: 'ChampionClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            },
+            {
+                model: Club,
+                as: 'RunnerUpClub',
+                attributes: ['id', 'full_name', 'short_name', 'abb_name']
+            }
+        ]
+    });
 
     // if not exists
     if (!champion) {

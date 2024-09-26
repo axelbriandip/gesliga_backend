@@ -4,14 +4,14 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-const { Champion } = require('../models/champion.model')
+const { Final } = require('../models/final.model')
 const { Club } = require('../models/club.model')
 
 const { AppError } = require('../utils/appError.util')
 const { catchAsync } = require('../utils/catchAsync.util')
 
-const getAllChampions = catchAsync(async(req, res, next) => {
-    const champions = await Champion.findAll({
+const getAllFinals = catchAsync(async(req, res, next) => {
+    const finals = await Final.findAll({
         where: { is_active: true },
         include: [
             {
@@ -29,15 +29,15 @@ const getAllChampions = catchAsync(async(req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        data: { champions }
+        data: { finals }
     })
 })
 
-const getChampion = catchAsync(async(req, res,next) => {
+const getFinal = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const champion = await Champion.findOne({
+    const final = await Final.findOne({
         where: { id, is_active: true },
         include: [
             {
@@ -54,21 +54,21 @@ const getChampion = catchAsync(async(req, res,next) => {
     });
 
     // if not exists
-    if (!champion) {
+    if (!final) {
         return res.status(404).json({
             status: 'error',
-            message: 'Champion not found'
+            message: 'Final not found'
         });
     }
 
     // response
     res.status(200).json({
         status: 'success',
-        data: { champion }
+        data: { Final }
     });
 })
 
-const createChampion = catchAsync(async(req, res,next) => {
+const createFinal = catchAsync(async(req, res,next) => {
     // receive data
     const {
         title,
@@ -84,7 +84,7 @@ const createChampion = catchAsync(async(req, res,next) => {
     } = req.body
     
     // create resource
-    const newChampion = await Champion.create({
+    const newFinal = await Final.create({
         title,
         season,
         description,
@@ -99,21 +99,21 @@ const createChampion = catchAsync(async(req, res,next) => {
 
     res.status(201).json({
         status: 'success',
-        data: { newChampion }
+        data: { newFinal }
     })
 })
 
-const updateChampion = catchAsync(async(req, res,next) => {
+const updateFinal = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const championToUpdate = await Champion.findOne({ where: { id, is_active: true } });
+    const finalToUpdate = await Final.findOne({ where: { id, is_active: true } });
 
     // if not exists
-    if (!championToUpdate) {
+    if (!finalToUpdate) {
         return res.status(404).json({
             status: 'error',
-            message: 'Champion not found'
+            message: 'Final not found'
         });
     }
 
@@ -132,54 +132,54 @@ const updateChampion = catchAsync(async(req, res,next) => {
     } = req.body
     
     // update
-    const championUpdated = await championToUpdate.update({
-        title: title || championToUpdate.title,
-        season: season || championToUpdate.season,
-        description: description || championToUpdate.description,
-        award_date: award_date || championToUpdate.award_date,
-        goals_champion: goals_champion || championToUpdate.goals_champion,
-        goals_runner_up: goals_runner_up || championToUpdate.goals_runner_up,
-        penalties_champion: penalties_champion || championToUpdate.penalties_champion,
-        penalties_runner_up: penalties_runner_up || championToUpdate.penalties_runner_up,
-        champion_club_id: champion_club_id || championToUpdate.champion_club_id,
-        runner_up_club_id: runner_up_club_id || championToUpdate.runner_up_club_id,
+    const finalUpdated = await finalToUpdate.update({
+        title: title || finalToUpdate.title,
+        season: season || finalToUpdate.season,
+        description: description || finalToUpdate.description,
+        award_date: award_date || finalToUpdate.award_date,
+        goals_champion: goals_champion || finalToUpdate.goals_champion,
+        goals_runner_up: goals_runner_up || finalToUpdate.goals_runner_up,
+        penalties_champion: penalties_champion || finalToUpdate.penalties_champion,
+        penalties_runner_up: penalties_runner_up || finalToUpdate.penalties_runner_up,
+        champion_club_id: champion_club_id || finalToUpdate.champion_club_id,
+        runner_up_club_id: runner_up_club_id || finalToUpdate.runner_up_club_id,
     })
 
     // champion updated
     res.status(200).json({
         status: 'success',
-        data: { championUpdated }
+        data: { finalUpdated }
     });
 })
 
-const deleteChampion = catchAsync(async(req, res,next) => {
+const deleteFinal = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
     // search for id
-    const championToDelete = await Champion.findOne({ where: { id, is_active: true } });
+    const finalToDelete = await Final.findOne({ where: { id, is_active: true } });
 
     // if not exists
-    if (!championToDelete) {
+    if (!finalToDelete) {
         return res.status(404).json({
             status: 'error',
-            message: 'Champion not found'
+            message: 'Final not found'
         });
     }
 
     // soft delete
-    const championDeleted = await championToDelete.update({ is_active: false })
+    const finalDeleted = await finalToDelete.update({ is_active: false })
 
     // user updated
     res.status(200).json({
         status: 'success',
-        data: { championDeleted }
+        data: { finalDeleted }
     });
 })
 
 module.exports = {
-    getAllChampions,
-    createChampion,
-    updateChampion,
-    deleteChampion,
-    getChampion
+    getAllFinals,
+    createFinal,
+    updateFinal,
+    deleteFinal,
+    getFinal
 }

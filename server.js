@@ -16,7 +16,7 @@ const { leaguesRouter } = require('./routes/leagues.routes')
 const { notificationsRouter } = require('./routes/notifications.routes')
 const { passesRouter } = require('./routes/passes.routes')
 const { sanctionsRouter } = require('./routes/sanctions.routes')
-const { championsRouter } = require('./routes/champions.routes')
+const { finalsRouter } = require('./routes/finals.routes')
 const { requestsRouter } = require('./routes/requests.routes')
 
 const app = express()
@@ -38,8 +38,8 @@ const startServer = async () => {
 
         initModels();
 
-        await db.sync();
-        // await db.sync({ force:true });
+        // await db.sync();
+        await db.sync({ force:true });
         // { force: true } borra y recrea las tablas en cada inicio
         console.log('Database synced successfully.');
         
@@ -60,7 +60,7 @@ app.use('/api/v1/leagues', leaguesRouter)
 app.use('/api/v1/notifications', notificationsRouter)
 app.use('/api/v1/passes', passesRouter)
 app.use('/api/v1/sanctions', sanctionsRouter)
-app.use('/api/v1/champions', championsRouter)
+app.use('/api/v1/finals', finalsRouter)
 app.use('/api/v1/requests', requestsRouter)
 
 // catch not-existings endpoints

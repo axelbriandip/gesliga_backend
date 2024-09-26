@@ -2,7 +2,7 @@
 const { db, DataTypes } = require('../utils/db.util');
 
 // create model
-const Champion = db.define('champion', {
+const Final = db.define('champion', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -62,9 +62,9 @@ const Champion = db.define('champion', {
         }
     },
 }, {
-    tableName: 'champion',
+    tableName: 'final',
     timestamps: true //add createdAt and updatedAt
 })
 
 // export
-module.exports = { Champion };
+module.exports = { Final };

@@ -7,13 +7,13 @@ const { Notification } = require('./notification_entry.model')
 const { Pass } = require('./pass.model')
 const { Sanction } = require('./sanction.model')
 const { League } = require('./league.model')
-const { Champion } = require('./champion.model')
+const { Final } = require('./final.model')
 
 // relations
 const initModels = () => {
-    // Champion has many-to-one relationships with Club for champion and runner-up
-    Champion.belongsTo(Club, { foreignKey: 'champion_club_id', as: 'ChampionClub' });
-    Champion.belongsTo(Club, { foreignKey: 'runner_up_club_id', as: 'RunnerUpClub' });
+    // Final has many-to-one relationships with Club for final and runner-up
+    Final.belongsTo(Club, { foreignKey: 'champion_club_id', as: 'ChampionClub' });
+    Final.belongsTo(Club, { foreignKey: 'runner_up_club_id', as: 'RunnerUpClub' });
 
     // Un Club tiene un Delegado (User)
     Club.belongsTo(User, {

@@ -5,7 +5,8 @@ const {
     createUser,
     updateUser,
     deleteUser,
-    getUser
+    getUser,
+    login
 } = require('../controllers/users.controller')
 
 // const { userExists } = require('../middlewares/users.middleware')
@@ -18,7 +19,7 @@ const {
 const usersRouter = express.Router()
 
 usersRouter.post('/signUp', createUser) // sign up
-// insert endpoint login
+usersRouter.post('/login', login)
 
 // Protecting below endpoints
 // usersRouter.use(protectSession);

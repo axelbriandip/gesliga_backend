@@ -74,6 +74,34 @@ const createUser = catchAsync(async(req, res,next) => {
     })
 })
 
+const login = catchAsync(async (req, res, next) => {
+	// Get email and password from req.body
+	const { username, password } = req.body;
+
+	// Validate if the user exist with given username
+	const user = await User.findOne({ where: { username, is_active: true } });
+
+	// Compare passwords (entered password vs db password)
+	// If user doesn't exists or passwords doesn't match, send error
+	if (!user || !(await bcrypt.compare(password, user.password))) {
+		// return next(new AppError('Wrong credentials', 400));
+        res.status(400).json({
+            status: 'Wrong credentials!'
+        });
+	}
+
+	// Remove password from response
+	user.password = undefined;
+
+	// Generate JWT (payload, secretOrPrivateKey, options)
+	const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1m' });
+
+	res.status(200).json({
+		status: 'success',
+		data: { user, token },
+	});
+});
+
 const updateUser = catchAsync(async(req, res,next) => {
     const { id } = req.params;
 
@@ -155,5 +183,6 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    getUser
+    getUser,
+    login
 }

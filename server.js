@@ -7,6 +7,7 @@ const dotenv = require('dotenv')
 const { db } = require('./utils/db.util')
 const { initModels } = require('./models/initModels')
 const { globalErrorHandler } = require('./controllers/error.controller')
+const cors = require('cors');
 
 // routers
 const { usersRouter } = require('./routes/users.routes')
@@ -21,6 +22,7 @@ const { requestsRouter } = require('./routes/requests.routes')
 
 const app = express()
 
+app.use(cors());
 app.use(express.json())
 app.use(helmet())
 app.use(compression())
@@ -38,8 +40,8 @@ const startServer = async () => {
 
         initModels();
 
-        // await db.sync();
-        await db.sync({ force:true });
+        await db.sync();
+        // await db.sync({ force:true });
         // { force: true } borra y recrea las tablas en cada inicio
         console.log('Database synced successfully.');
         

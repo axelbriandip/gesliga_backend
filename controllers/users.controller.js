@@ -84,10 +84,7 @@ const login = catchAsync(async (req, res, next) => {
 	// Compare passwords (entered password vs db password)
 	// If user doesn't exists or passwords doesn't match, send error
 	if (!user || !(await bcrypt.compare(password, user.password))) {
-		// return next(new AppError('Wrong credentials', 400));
-        res.status(400).json({
-            status: 'Wrong credentials!'
-        });
+		return next(new AppError('Usuario y/o contraseña incorrectos', 401));
 	}
 
 	// Remove password from response
@@ -95,10 +92,10 @@ const login = catchAsync(async (req, res, next) => {
 
 	// Generate JWT (payload, secretOrPrivateKey, options)
 	const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1m' });
-
+    
 	res.status(200).json({
-		status: 'success',
-		data: { user, token },
+        status: 'success',
+        data: { user, token },
 	});
 });
 

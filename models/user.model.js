@@ -18,11 +18,6 @@ const User = db.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
     first_name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -31,17 +26,26 @@ const User = db.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    role: {
-        type: DataTypes.ENUM('admin', 'delegado', 'invitado'),
-        defaultValue: 'invitado'
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     phone_number: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    role: {
         type: DataTypes.STRING,
         allowNull: false
     },
     is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    club_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     tableName: 'user', // Esto fuerza a que la tabla se llame 'user' en vez de 'users'

@@ -44,11 +44,12 @@ const createUser = catchAsync(async(req, res,next) => {
     const {
         username,
         password,
-        email,
         first_name,
         last_name,
+        email,
+        phone_number,
         role,
-        phone_number
+        club_id
     } = req.body
     
     // encrypt password
@@ -59,11 +60,12 @@ const createUser = catchAsync(async(req, res,next) => {
     const newUser = await User.create({
         username,
         password: hashedPassword,
-        email,
         first_name,
         last_name,
+        email,
+        phone_number,
         role,
-        phone_number
+        club_id
     })
 
     newUser.password = undefined
@@ -117,11 +119,12 @@ const updateUser = catchAsync(async(req, res,next) => {
     const {
         username,
         password,
-        email,
         first_name,
         last_name,
+        email,
+        phone_number,
         role,
-        phone_number
+        club_id
     } = req.body
     
     // encrypt password
@@ -135,11 +138,12 @@ const updateUser = catchAsync(async(req, res,next) => {
     const userUpdated = await userToUpdate.update({
         username: username || userToUpdate.username,
         password: hashedPassword,
-        email: email || userToUpdate.email,
         first_name: first_name || userToUpdate.first_name,
         last_name: last_name || userToUpdate.last_name,
+        email: email || userToUpdate.email,
+        phone_number: phone_number || userToUpdate.phone_number,
         role: role || userToUpdate.role,
-        phone_number: phone_number || userToUpdate.phone_number
+        club_id: club_id || userToUpdate.club_id
     })
 
     userUpdated.password = undefined

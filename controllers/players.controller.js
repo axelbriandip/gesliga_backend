@@ -45,29 +45,17 @@ const createPlayer = catchAsync(async(req, res,next) => {
         first_name,
         last_name,
         date_of_birth,
-        nationality,
-        position,
-        preferred_foot,
-        gender,
-        birth_state,
-        contact_phone,
         dni,
-        license_number,
+        club_id
     } = req.body
-        
+    
     // create resource
     const newPlayer = await Player.create({
         first_name,
         last_name,
         date_of_birth,
-        nationality,
-        position,
-        preferred_foot,
-        gender,
-        birth_state,
-        contact_phone,
         dni,
-        license_number,
+        club_id
     })
 
     res.status(201).json({
@@ -95,14 +83,8 @@ const updatePlayer = catchAsync(async(req, res,next) => {
         first_name,
         last_name,
         date_of_birth,
-        nationality,
-        position,
-        preferred_foot,
-        gender,
-        birth_state,
-        contact_phone,
         dni,
-        license_number,
+        club_id
     } = req.body
     
     // update
@@ -110,14 +92,8 @@ const updatePlayer = catchAsync(async(req, res,next) => {
         first_name: first_name || playerToUpdate.first_name,
         last_name: last_name || playerToUpdate.last_name,
         date_of_birth: date_of_birth || playerToUpdate.date_of_birth,
-        nationality: nationality || playerToUpdate.nationality,
-        position: position || playerToUpdate.position,
-        preferred_foot: preferred_foot || playerToUpdate.preferred_foot,
-        gender: gender || playerToUpdate.gender,
-        birth_state: birth_state || playerToUpdate.birth_state,
-        contact_phone: contact_phone || playerToUpdate.contact_phone,
         dni: dni || playerToUpdate.dni,
-        license_number: license_number || playerToUpdate.license_number,
+        club_id: club_id || playerToUpdate.club_id,
     })
 
     // user updated

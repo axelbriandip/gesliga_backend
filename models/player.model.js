@@ -9,58 +9,29 @@ const Player = db.define('player', {
         allowNull: false
     },
     first_name: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false
     },
     last_name: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false
     },
     date_of_birth: {
         type: DataTypes.DATEONLY,
         allowNull: false
     },
-    nationality: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    position: {
-        type: DataTypes.ENUM('Arquero', 'Defensor', 'Mediocampista', 'Delantero'),
-        allowNull: false
-    },
-    preferred_foot: {
-        type: DataTypes.ENUM('Zurdo', 'Derecho', 'Ambidiestro'),
-        allowNull: false
-    },
-    gender: {
-        type: DataTypes.ENUM('Femenino', 'Masculino'),
-        allowNull: false
-    },
-    birth_state: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    contact_phone: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            is: /^[0-9]+$/ // Solo números
-        }
-    },
     dni: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isNumeric: true
-        }
-    },
-    license_number: {
-        type: DataTypes.STRING,
-        allowNull: false
+        unique: true
     },
     is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    club_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     tableName: 'player',
